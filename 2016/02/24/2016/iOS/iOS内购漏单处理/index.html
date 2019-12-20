@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="iOS,SDK,IAP," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="iOS 内购（ IAP）处理流程（漏单）最重要的一点：在 确认 服务端收到 receipt 之前(或者说确认玩家收到物品前)客户端不要结束订单（不要调用 [[SKPaymentQueue defaultQueue] finishTransaction:transaction]; 这边介绍的是服务端验证的内购 漏单漏单：玩家支付完成了却没有收到物品、且自己的服务端没有任何记录 iOS 的订单。iOS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS 内购（ IAP）处理流程（漏单）">
+<meta property="og:url" content="http://yoursite.com/2016/02/24/2016/iOS/iOS%E5%86%85%E8%B4%AD%E6%BC%8F%E5%8D%95%E5%A4%84%E7%90%86/index.html">
+<meta property="og:site_name" content="好大一棵树的博客">
+<meta property="og:description" content="iOS 内购（ IAP）处理流程（漏单）最重要的一点：在 确认 服务端收到 receipt 之前(或者说确认玩家收到物品前)客户端不要结束订单（不要调用 [[SKPaymentQueue defaultQueue] finishTransaction:transaction]; 这边介绍的是服务端验证的内购 漏单漏单：玩家支付完成了却没有收到物品、且自己的服务端没有任何记录 iOS 的订单。iOS">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2016-02-23T16:00:00.000Z">
+<meta property="article:modified_time" content="2019-12-09T12:45:46.534Z">
+<meta property="article:author" content="好大一棵树">
+<meta property="article:tag" content="iOS">
+<meta property="article:tag" content="SDK">
+<meta property="article:tag" content="IAP">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/02/24/2016/iOS/iOS内购漏单处理/"/>
+
+
+
+
+
+  <title>iOS 内购（ IAP）处理流程（漏单） | 好大一棵树的博客</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.1.1"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">好大一棵树的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/02/24/2016/iOS/iOS%E5%86%85%E8%B4%AD%E6%BC%8F%E5%8D%95%E5%A4%84%E7%90%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="好大一棵树">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="好大一棵树的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">iOS 内购（ IAP）处理流程（漏单）</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-02-24T00:00:00+08:00">
+                2016-02-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2016/02/24/2016/iOS/iOS%E5%86%85%E8%B4%AD%E6%BC%8F%E5%8D%95%E5%A4%84%E7%90%86/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2016/02/24/2016/iOS/iOS%E5%86%85%E8%B4%AD%E6%BC%8F%E5%8D%95%E5%A4%84%E7%90%86/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="iOS-内购（-IAP）处理流程（漏单）"><a href="#iOS-内购（-IAP）处理流程（漏单）" class="headerlink" title="iOS 内购（ IAP）处理流程（漏单）"></a>iOS 内购（ IAP）处理流程（漏单）</h3><h3 id="最重要的一点："><a href="#最重要的一点：" class="headerlink" title="最重要的一点："></a>最重要的一点：</h3><p>在 确认 服务端收到 receipt 之前(或者说确认玩家收到物品前)客户端不要结束订单（不要调用 [[SKPaymentQueue defaultQueue] finishTransaction:transaction];</p>
+<p>这边介绍的是服务端验证的内购</p>
+<h4 id="漏单"><a href="#漏单" class="headerlink" title="漏单"></a>漏单</h4><p>漏单：玩家支付完成了却没有收到物品、且自己的服务端没有任何记录 iOS 的订单。iOS 的补单是非常麻烦的，用户提供支付的截图中的订单号我们又不能在苹果 Connect 或者其他地方找到相应的订单号。</p>
+<a id="more"></a>
+
+<h4 id="购买步骤"><a href="#购买步骤" class="headerlink" title="购买步骤"></a>购买步骤</h4><p>我们这边的处理步骤</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">1、向苹果服务器请求商品信息（可以在启动 App 的时候请求）</span><br><span class="line"></span><br><span class="line">2、手机端向自己服务器发送订单请求（生成我们平台自己的订单号）</span><br><span class="line"></span><br><span class="line">3、向苹果发送购买请求、且把自己的订单赋值给 payment.applicationUsername （iOS7之后）</span><br><span class="line"></span><br><span class="line">4、用户支付完成（网上很多例子在这边调用 finishTransaction、会造成一定量的漏单）</span><br><span class="line"></span><br><span class="line">5、把 receipt 和自己的订单号发送到自己的服务器验</span><br><span class="line"></span><br><span class="line">6、服务端向苹果发送验证</span><br><span class="line"></span><br><span class="line">7、本地收到服务端确定收到 receipt 的信息、及物品是否下发、调用结束购买 [[SKPaymentQueue defaultQueue] finishTransaction:transaction];</span><br></pre></td></tr></table></figure>
+
+<h4 id="注意："><a href="#注意：" class="headerlink" title="注意："></a>注意：</h4><ul>
+<li>1、自己的订单号：是根据苹果的productid和服务端其他一些信息制作而成，通过productid可以知道用户购买的时间、价格、物品等信息</li>
+<li>2、finishTransaction：没有调用之前，成功购买的订单会一直留在[SKPaymentQueue defaultQueue]，且每次应用进入前台，都会调用支付完成的流程（前提是注册了addTransactionObserver 的观察者）<br>苹果建议在物品真正发放后在调用 finishTransaction。<a href="https://developer.apple.com/library/ios/documentation/NetworkingInternet/Conceptual/StoreKitGuide/Chapters/DeliverProduct.html#//apple_ref/doc/uid/TP40008267-CH5-SW10" target="_blank" rel="noopener">文档查看</a></li>
+<li>3、流程中第3步，iOS6 是不能使用 payment.applicationUsername，我这边是这样子处理把自己的 orderid 和 productIdentifier（为 key ）对应，存于一个自定义的 plist 中。这样在漏单的情况下，自己的 orderid 和 productIdentifier 即使不会一一对应，也可以确保 orderid 的套餐和价钱不会变</li>
+<li>4、在购买的过程中（从用户发起购买请求到用户收到物品），只有一个订单在处理中，即用户完成了一单才再能购买下一单</li>
+<li>5、现在从后台的记录看，iOS6 用户的充值是非常的少，（2015年12月29日）近3个月已经没有iOS6版本充值了记录了</li>
+</ul>
+<h4 id="服务器端"><a href="#服务器端" class="headerlink" title="服务器端"></a>服务器端</h4><p>服务端需要处理一个receipt中携带了多个未处理的订单，即在in-app中有多个支付记录。<br>因为虽然按正常逻辑，一次只会处理一笔支付，在漏掉以前充值订单的情况下，一个receipt，可能含有多个购买记录，这些记录可能就是没有下发给用户的，需要对receipt 的 in-app记录逐条检查，根据订单记录查看某一单是否已经下发过了。</p>
+<hr>
+<p>2016年02月24日16:00:26更新<br>按上面支付流程上线后，发现还有问题，就是步骤第2步的时候，把自己的订单号存在payment.applicationUsername，<br>有一些特殊情况会导致payment.applicationUsername为空，<a href="https://forums.developer.apple.com/thread/14136" target="_blank" rel="noopener">这里</a>有人碰到过，我发现我们的后台日志也有这种情况，</p>
+<p>这就需要在payment.applicationUsername为空的时候，<br>使用其他方式获取刚刚从服务器获取的订单号(我这边是使用上次存在本地的订单号)<br>或者重新请求自己的服务端重新生成订单号。</p>
+<hr>
+<p>一些参考地址</p>
+<ul>
+<li><a href="https://developer.apple.com/library/ios/documentation/NetworkingInternet/Conceptual/StoreKitGuide/Chapters/Restoring.html#//apple_ref/doc/uid/TP40008267-CH8-SW2" target="_blank" rel="noopener">[In-App Purchase Programming Guide]</a></li>
+<li><a href="https://developer.apple.com/library/ios/technotes/tn2387/_index.html" target="_blank" rel="noopener">[In-App Purchase Best Practices]</a></li>
+<li><a href="https://developer.apple.com/library/ios/releasenotes/General/ValidateAppStoreReceipt/Chapters/ReceiptFields.html#//apple_ref/doc/uid/TP40010573-CH106-SW1" target="_blank" rel="noopener">[Receipt Fields]</a></li>
+<li><a href="https://forums.developer.apple.com/thread/8954" target="_blank" rel="noopener">[in-app is empty]</a></li>
+<li><a href="https://developer.apple.com/library/content/technotes/tn2259/_index.html" target="_blank" rel="noopener">Adding In-App Purchase to your Applications</a></li>
+<li><a href="https://developer.apple.com/library/ios/technotes/tn2413/_index.html#//apple_ref/doc/uid/DTS40016228-CH1-TNTAG1" target="_blank" rel="noopener">[In-App Purchase FAQ]</a></li>
+</ul>
+<hr>
+<blockquote>
+<p>如果有朋友有比较好的建议，请告诉我下</p>
+</blockquote>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS/" rel="tag"># iOS</a>
+          
+            <a href="/tags/SDK/" rel="tag"># SDK</a>
+          
+            <a href="/tags/IAP/" rel="tag"># IAP</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/04/27/2016/iOS/%E5%86%99%20iOS%20SDK%20%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/" rel="prev" title="写 iOS SDK 注意事项">
+                写 iOS SDK 注意事项 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">好大一棵树</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%20%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#iOS-内购（-IAP）处理流程（漏单）"><span class="nav-number">1.</span> <span class="nav-text">iOS 内购（ IAP）处理流程（漏单）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#最重要的一点："><span class="nav-number">2.</span> <span class="nav-text">最重要的一点：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#漏单"><span class="nav-number">2.1.</span> <span class="nav-text">漏单</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#购买步骤"><span class="nav-number">2.2.</span> <span class="nav-text">购买步骤</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#注意："><span class="nav-number">2.3.</span> <span class="nav-text">注意：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#服务器端"><span class="nav-number">2.4.</span> <span class="nav-text">服务器端</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">好大一棵树</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'M1iIiMu2EuWiEhJrqkD4ajay-gzGzoHsz',
+        appKey: 'RmabzVIQU1Scku4UMi4WK26V',
+        placeholder: 'Comment ...',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
