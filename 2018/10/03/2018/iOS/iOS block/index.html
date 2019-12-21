@@ -77,6 +77,15 @@
   
 
 
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?44364fa5db2e786b11b925f5358d2601";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
 
 
 
@@ -255,7 +264,7 @@
         <h1 id="Block"><a href="#Block" class="headerlink" title="Block"></a>Block</h1><p>参考书本：Objective-C 高级编程</p>
 <h2 id="Block-概要"><a href="#Block-概要" class="headerlink" title="Block 概要"></a>Block 概要</h2><h3 id="什么是Block"><a href="#什么是Block" class="headerlink" title="什么是Block"></a>什么是Block</h3><p>block 是 C 语言的扩充功能，带有自动变量（局部变量）的匿名函数。</p>
 <h3 id="Block-定义"><a href="#Block-定义" class="headerlink" title="Block 定义"></a>Block 定义</h3><p>^返回值类型 参数列表 表达式</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">^int (int count)&#123;</span><br><span class="line">	return count+1;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight axapta"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">^<span class="keyword">int</span> (<span class="keyword">int</span> <span class="keyword">count</span>)&#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">count</span>+<span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>其中“返回值类型”和“参数列表”是可以省略的</p>
 <p>和 C 语言的普通函数项相比</p>
@@ -274,17 +283,17 @@
 <li>5、全局变量</li>
 </ul>
 <p>可以使用 typedef 定义一个Block</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">typedef int (^block_t)(int);</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">typedef</span> <span class="title">int</span> <span class="params">(^<span class="keyword">block_t</span>)</span><span class="params">(<span class="keyword">int</span>)</span></span>;</span><br></pre></td></tr></table></figure>
 
 <h3 id="Block-可以捕获局部变量"><a href="#Block-可以捕获局部变量" class="headerlink" title="Block 可以捕获局部变量"></a>Block 可以捕获局部变量</h3><p>例子</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">int main() &#123;</span><br><span class="line">	int dmy &#x3D; 256;</span><br><span class="line">	int val &#x3D; 10;</span><br><span class="line">	void (^blk)(void) &#x3D; ^&#123;</span><br><span class="line">		printf(&quot;val 1 &#x3D;  %d&quot;, val);</span><br><span class="line">	&#125;	</span><br><span class="line">	</span><br><span class="line">	val &#x3D; 2;</span><br><span class="line">	blk(val)</span><br><span class="line">	printf(&quot;val 2 &#x3D; %d&quot;, val);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> dmy = <span class="number">256</span>;</span><br><span class="line">	<span class="keyword">int</span> val = <span class="number">10</span>;</span><br><span class="line">	<span class="keyword">void</span> (^blk)(<span class="keyword">void</span>) = ^&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"val 1 =  %d"</span>, val);</span><br><span class="line">	&#125;	</span><br><span class="line">	</span><br><span class="line">	val = <span class="number">2</span>;</span><br><span class="line">	blk(val)</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"val 2 = %d"</span>, val);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>输出结果</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">val 1 &#x3D; 10</span><br><span class="line">val 2 &#x3D; 10</span><br></pre></td></tr></table></figure>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">val <span class="number">1</span> = <span class="number">10</span></span><br><span class="line">val <span class="number">2</span> = <span class="number">10</span></span><br></pre></td></tr></table></figure>
 
 <h3 id="block"><a href="#block" class="headerlink" title="__block"></a>__block</h3><p>__block 修饰的局部变量 可以在 block 表达式里面修改</p>
 <p>如果局部变量是一个NSMutableArray或者其他的可变集合类的对象</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">NSMutableArray arr &#x3D; [[NSMutalbeArray alloc] init];</span><br><span class="line">void (^blk)(void) &#x3D; ^&#123;</span><br><span class="line">	NSObject *obj1 &#x3D; [[NSObject alloc] init];</span><br><span class="line">	</span><br><span class="line">	[arr addObject:obj1];&#x2F;&#x2F;这个是可以添加变量</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">NSMutableArray</span> arr = [[<span class="built_in">NSMutalbeArray</span> alloc] init];</span><br><span class="line"><span class="keyword">void</span> (^blk)(<span class="keyword">void</span>) = ^&#123;</span><br><span class="line">	<span class="built_in">NSObject</span> *obj1 = [[<span class="built_in">NSObject</span> alloc] init];</span><br><span class="line">	</span><br><span class="line">	[arr addObject:obj1];<span class="comment">//这个是可以添加变量</span></span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h1 id=""><a href="#" class="headerlink" title=""></a></h1><h2 id="Block-本质"><a href="#Block-本质" class="headerlink" title="Block 本质"></a>Block 本质</h2><h1 id="block-常见问题"><a href="#block-常见问题" class="headerlink" title="block 常见问题"></a>block 常见问题</h1><ul>
 <li><p>1、block的原理是怎样的？本质是什么？</p>
 </li>
