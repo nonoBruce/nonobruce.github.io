@@ -47,13 +47,13 @@
 
   <meta property="og:type" content="website">
 <meta property="og:title" content="好大一棵树的博客">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta property="og:url" content="http://yoursite.com/page/3/index.html">
 <meta property="og:site_name" content="好大一棵树的博客">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:author" content="好大一棵树">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://yoursite.com/">
+<link rel="canonical" href="http://yoursite.com/page/3/">
 
 
 <script id="page-configurations">
@@ -181,7 +181,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/09/2019/Hexo/Hexo%20Next%20%E9%85%8D%E7%BD%AE/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/27/EffectiveObjective-C/Twitter%E7%99%BB%E5%BD%95%E7%9A%84%E5%89%AF%E6%9C%AC/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -195,7 +195,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2019/12/09/2019/Hexo/Hexo%20Next%20%E9%85%8D%E7%BD%AE/" class="post-title-link" itemprop="url">Hexo Next 配置</a>
+            <a href="/2018/08/27/EffectiveObjective-C/Twitter%E7%99%BB%E5%BD%95%E7%9A%84%E5%89%AF%E6%9C%AC/" class="post-title-link" itemprop="url">iOS Twitter 登录</a>
         </h1>
 
         <div class="post-meta">
@@ -205,14 +205,232 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2019-12-09 00:00:00" itemprop="dateCreated datePublished" datetime="2019-12-09T00:00:00+08:00">2019-12-09</time>
+              <time title="创建时间：2018-08-27 00:00:00" itemprop="dateCreated datePublished" datetime="2018-08-27T00:00:00+08:00">2018-08-27</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-12-21 01:05:02" itemprop="dateModified" datetime="2019-12-21T01:05:02+08:00">2019-12-21</time>
+                <time title="修改时间：2019-12-09 20:46:40" itemprop="dateModified" datetime="2019-12-09T20:46:40+08:00">2019-12-09</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2018/08/27/EffectiveObjective-C/Twitter%E7%99%BB%E5%BD%95%E7%9A%84%E5%89%AF%E6%9C%AC/" class="post-meta-item leancloud_visitors" data-flag-title="iOS Twitter 登录" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2018/08/27/EffectiveObjective-C/Twitter%E7%99%BB%E5%BD%95%E7%9A%84%E5%89%AF%E6%9C%AC/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2018/08/27/EffectiveObjective-C/Twitter%E7%99%BB%E5%BD%95%E7%9A%84%E5%89%AF%E6%9C%AC/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="一些参考地址："><a href="#一些参考地址：" class="headerlink" title="一些参考地址："></a>一些参考地址：</h1><ul>
+<li><a href="https://developer.twitter.com/en/docs/publisher-tools/twitterkit/overview" target="_blank" rel="noopener">Twitter官网地址</a> </li>
+<li><a href="https://github.com/twitter/twitter-kit-ios/wiki/Installation" target="_blank" rel="noopener">TwitterSDK获取，工程配置</a></li>
+<li><a href="https://github.com/twitter/twitter-kit-ios/wiki/Log-In-With-Twitter" target="_blank" rel="noopener">Twitter登录接入</a></li>
+<li><a href="https://github.com/twitter/twitter-kit-ios/issues" target="_blank" rel="noopener">Twitter遇到问题,可以在Twitter工程的Issues里搜索</a></li>
+</ul>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2018/08/27/EffectiveObjective-C/Twitter%E7%99%BB%E5%BD%95%E7%9A%84%E5%89%AF%E6%9C%AC/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/27/2019/iOS/Twitter%E7%99%BB%E5%BD%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="好大一棵树">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="好大一棵树的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/08/27/2019/iOS/Twitter%E7%99%BB%E5%BD%95/" class="post-title-link" itemprop="url">iOS Twitter 登录</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-08-27 00:00:00" itemprop="dateCreated datePublished" datetime="2018-08-27T00:00:00+08:00">2018-08-27</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-12-09 20:46:19" itemprop="dateModified" datetime="2019-12-09T20:46:19+08:00">2019-12-09</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2018/08/27/2019/iOS/Twitter%E7%99%BB%E5%BD%95/" class="post-meta-item leancloud_visitors" data-flag-title="iOS Twitter 登录" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2018/08/27/2019/iOS/Twitter%E7%99%BB%E5%BD%95/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2018/08/27/2019/iOS/Twitter%E7%99%BB%E5%BD%95/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="一些参考地址："><a href="#一些参考地址：" class="headerlink" title="一些参考地址："></a>一些参考地址：</h1><ul>
+<li><a href="https://developer.twitter.com/en/docs/publisher-tools/twitterkit/overview" target="_blank" rel="noopener">Twitter官网地址</a> </li>
+<li><a href="https://github.com/twitter/twitter-kit-ios/wiki/Installation" target="_blank" rel="noopener">TwitterSDK获取，工程配置</a></li>
+<li><a href="https://github.com/twitter/twitter-kit-ios/wiki/Log-In-With-Twitter" target="_blank" rel="noopener">Twitter登录接入</a></li>
+<li><a href="https://github.com/twitter/twitter-kit-ios/issues" target="_blank" rel="noopener">Twitter遇到问题,可以在Twitter工程的Issues里搜索</a></li>
+</ul>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2018/08/27/2019/iOS/Twitter%E7%99%BB%E5%BD%95/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/17/2017/hexo-gitment/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="好大一棵树">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="好大一棵树的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2017/10/17/2017/hexo-gitment/" class="post-title-link" itemprop="url">Hexo-Yilia中添加gitment评论功能</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-10-17 15:09:55" itemprop="dateCreated datePublished" datetime="2017-10-17T15:09:55+08:00">2017-10-17</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-12-09 20:45:09" itemprop="dateModified" datetime="2019-12-09T20:45:09+08:00">2019-12-09</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -227,7 +445,7 @@
             </span>
 
           
-            <span id="/2019/12/09/2019/Hexo/Hexo%20Next%20%E9%85%8D%E7%BD%AE/" class="post-meta-item leancloud_visitors" data-flag-title="Hexo Next 配置" title="阅读次数">
+            <span id="/2017/10/17/2017/hexo-gitment/" class="post-meta-item leancloud_visitors" data-flag-title="Hexo-Yilia中添加gitment评论功能" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -242,8 +460,8 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2019/12/09/2019/Hexo/Hexo%20Next%20%E9%85%8D%E7%BD%AE/#comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2019/12/09/2019/Hexo/Hexo%20Next%20%E9%85%8D%E7%BD%AE/" itemprop="commentCount"></span>
+    <a title="valine" href="/2017/10/17/2017/hexo-gitment/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2017/10/17/2017/hexo-gitment/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -258,244 +476,11 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>2019-12-09 把 Hexo 的主题改为 了 Next 了</p>
-<h2 id="主题设置"><a href="#主题设置" class="headerlink" title="主题设置"></a>主题设置</h2><p>下载主题</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ cd 主目录&#x2F;</span><br><span class="line">git clone --branch v7.6.0 https:&#x2F;&#x2F;github.com&#x2F;theme-next&#x2F;hexo-theme-next themes&#x2F;next</span><br></pre></td></tr></table></figure>
-
-
-<p>配置主题</p>
-<p>主目录-&gt;_config.yml</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">theme: next</span><br></pre></td></tr></table></figure>
-
-<h2 id="配置评论系统-valine"><a href="#配置评论系统-valine" class="headerlink" title="配置评论系统 valine"></a>配置评论系统 valine</h2><p>查看如何配置 valine</p>
-<p><a href="https://valine.js.org/quickstart.html" target="_blank" rel="noopener">https://valine.js.org/quickstart.html</a></p>
+          <p>Gitment是使用的GitHub Issues作为评论系统</p>
+<p><a href="https://github.com/imsun/gitment" target="_blank" rel="noopener">Gitment</a></p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2019/12/09/2019/Hexo/Hexo%20Next%20%E9%85%8D%E7%BD%AE/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/09/2019/iOS/iOS%E7%BA%A2%E7%82%B9%E8%AE%BE%E8%AE%A1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="好大一棵树">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="好大一棵树的博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/12/09/2019/iOS/iOS%E7%BA%A2%E7%82%B9%E8%AE%BE%E8%AE%A1/" class="post-title-link" itemprop="url">iOS 红点设计</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-12-09 00:00:00" itemprop="dateCreated datePublished" datetime="2019-12-09T00:00:00+08:00">2019-12-09</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-12-13 01:05:57" itemprop="dateModified" datetime="2019-12-13T01:05:57+08:00">2019-12-13</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/iOS/" itemprop="url" rel="index">
-                    <span itemprop="name">iOS</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2019/12/09/2019/iOS/iOS%E7%BA%A2%E7%82%B9%E8%AE%BE%E8%AE%A1/" class="post-meta-item leancloud_visitors" data-flag-title="iOS 红点设计" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2019/12/09/2019/iOS/iOS%E7%BA%A2%E7%82%B9%E8%AE%BE%E8%AE%A1/#comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2019/12/09/2019/iOS/iOS%E7%BA%A2%E7%82%B9%E8%AE%BE%E8%AE%A1/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="实现方式"><a href="#实现方式" class="headerlink" title="实现方式"></a>实现方式</h1><p>用树结构实现红点提示</p>
-<p>树的层级结构和 UI 的层级结构对应。</p>
-<p><img src="iOS%E7%BA%A2%E7%82%B9%E8%AE%BE%E8%AE%A1/1.png" alt="iOS红点设计"></p>
-<p>当叶节点红点更新的时候，需要更新叶节点到根节点这条路径上的所有节点的红点数据（这个路径可能会有多条–通常红点页面可能有多个入口）</p>
-<h1 id="节点设计"><a href="#节点设计" class="headerlink" title="节点设计"></a>节点设计</h1><p>树节点的设计</p>
-<ul>
-<li>1、红点数量</li>
-<li>2、子节点列表</li>
-<li>3、父节点列表</li>
-</ul>
-<p>当一个叶节点的红点发生了变化，则遍历叶节点到根节点的路径，更新所有的红点数据。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2019/12/09/2019/iOS/iOS%E7%BA%A2%E7%82%B9%E8%AE%BE%E8%AE%A1/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/25/2019/iOS/RunLoop/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="好大一棵树">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="好大一棵树的博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/04/25/2019/iOS/RunLoop/" class="post-title-link" itemprop="url">iOS RunLoop 苹果文档和简单翻译</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-04-25 00:00:00" itemprop="dateCreated datePublished" datetime="2019-04-25T00:00:00+08:00">2019-04-25</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-12-09 20:46:11" itemprop="dateModified" datetime="2019-12-09T20:46:11+08:00">2019-12-09</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/iOS/" itemprop="url" rel="index">
-                    <span itemprop="name">iOS</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2019/04/25/2019/iOS/RunLoop/" class="post-meta-item leancloud_visitors" data-flag-title="iOS RunLoop 苹果文档和简单翻译" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2019/04/25/2019/iOS/RunLoop/#comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2019/04/25/2019/iOS/RunLoop/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="苹果文档："><a href="#苹果文档：" class="headerlink" title="苹果文档："></a>苹果文档：</h1><ul>
-<li><a href="https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/Multithreading/AboutThreads/AboutThreads.html#//apple_ref/doc/uid/10000057i-CH6-SW2" target="_blank" rel="noopener">Run Loops 概述</a></li>
-<li><a href="https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/Multithreading/RunLoopManagement/RunLoopManagement.html#//apple_ref/doc/uid/10000057i-CH16-SW1" target="_blank" rel="noopener">Run Loops 详情</a></li>
-</ul>
-<p>本篇主要是看下苹果的文档描述，作下简单的翻译。</p>
-<h1 id="Run-Loops-概述"><a href="#Run-Loops-概述" class="headerlink" title="Run Loops 概述"></a>Run Loops 概述</h1><p>A run loop is a piece of infrastructure used to manage events arriving asynchronously on a thread. A run loop works by monitoring one or more event sources for the thread. As events arrive, the system wakes up the thread and dispatches the events to the run loop, which then dispatches them to the handlers you specify. If no events are present and ready to be handled, the run loop puts the thread to sleep.</p>
-<p>RunLoop 是线程管理异步事件到达的基础结构，RunLoop 为线程监听一个或者多个事件源。<br>当事件到达时，系统唤醒线程并把事件交给 RunLoop 去处理。如果没有事件到达或者需要处理，RunLoop 就会让线程休眠。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2019/04/25/2019/iOS/RunLoop/#more" rel="contents">
+              <a class="btn" href="/2017/10/17/2017/hexo-gitment/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -519,7 +504,7 @@
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
