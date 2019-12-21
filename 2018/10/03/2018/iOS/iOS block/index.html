@@ -294,7 +294,7 @@
 <h3 id="block"><a href="#block" class="headerlink" title="__block"></a>__block</h3><p>__block 修饰的局部变量 可以在 block 表达式里面修改</p>
 <p>如果局部变量是一个NSMutableArray或者其他的可变集合类的对象</p>
 <figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">NSMutableArray</span> arr = [[<span class="built_in">NSMutalbeArray</span> alloc] init];</span><br><span class="line"><span class="keyword">void</span> (^blk)(<span class="keyword">void</span>) = ^&#123;</span><br><span class="line">	<span class="built_in">NSObject</span> *obj1 = [[<span class="built_in">NSObject</span> alloc] init];</span><br><span class="line">	</span><br><span class="line">	[arr addObject:obj1];<span class="comment">//这个是可以添加变量</span></span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id=""><a href="#" class="headerlink" title=""></a></h1><h2 id="Block-本质"><a href="#Block-本质" class="headerlink" title="Block 本质"></a>Block 本质</h2><h1 id="block-常见问题"><a href="#block-常见问题" class="headerlink" title="block 常见问题"></a>block 常见问题</h1><ul>
+<h1 id><a href="#" class="headerlink" title></a></h1><h2 id="Block-本质"><a href="#Block-本质" class="headerlink" title="Block 本质"></a>Block 本质</h2><h1 id="block-常见问题"><a href="#block-常见问题" class="headerlink" title="block 常见问题"></a>block 常见问题</h1><ul>
 <li><p>1、block的原理是怎样的？本质是什么？</p>
 </li>
 <li><p>2、__block的作用是什么？有什么使用注意点？</p>

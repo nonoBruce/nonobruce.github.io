@@ -52,7 +52,7 @@
 <meta property="og:site_name" content="好大一棵树的博客">
 <meta property="og:description" content="dispatch_sync  Submits a block to the specified dispatch queue for synchronous execution.  Unlike dispatch_async, this function does not return until the block has finished.  Calling this function and">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://yoursite.com/1.png">
+<meta property="og:image" content="http://yoursite.com/2018/12/03/2018/iOS/GCDdispatch_sync%E9%94%81%E6%AD%BB/1.png">
 <meta property="article:published_time" content="2018-12-02T16:00:00.000Z">
 <meta property="article:modified_time" content="2019-12-14T01:05:46.400Z">
 <meta property="article:author" content="好大一棵树">
@@ -60,7 +60,7 @@
 <meta property="article:tag" content="GCD">
 <meta property="article:tag" content="GCD 死锁">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://yoursite.com/1.png">
+<meta name="twitter:image" content="http://yoursite.com/2018/12/03/2018/iOS/GCDdispatch_sync%E9%94%81%E6%AD%BB/1.png">
 
 <link rel="canonical" href="http://yoursite.com/2018/12/03/2018/iOS/GCDdispatch_sync%E9%94%81%E6%AD%BB/">
 
@@ -294,7 +294,7 @@
 <p>但是 dispatch_sync 会阻塞当前线程，让线程先去执行 block 任务，但是在 block 任务也在 main_queue 的尾部</p>
 <p>因为执行 main_queue 的线程被阻塞了，就永远执行不到 block 任务了，就锁住了。</p>
 <p>当然在其他子线程调用这个是不会锁死的。</p>
-<p><img src="/1.png" alt=""></p>
+<p><img src="/2018/12/03/2018/iOS/GCDdispatch_sync%E9%94%81%E6%AD%BB/1.png" alt></p>
 <h2 id="一般-queue-锁死"><a href="#一般-queue-锁死" class="headerlink" title="一般 queue 锁死"></a>一般 queue 锁死</h2><p>同样的在其他（serial的）queue 中，只要 dispatch_sync 的任务 block，是被加入当前的 queue 中都会被锁死。<br>所以一般不要在嵌套里面放 dispatch_sync<br>什么是当前的 queue 呢？即当前在执行的 queue，我在说啥？</p>
 <p>下面例子的 queue 都是 DISPATCH_QUEUE_SERIAL 类型的 queue<br>例子：</p>
 <figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">dispatch_async(<span class="name">queue</span>, ^&#123;//block1</span><br><span class="line">    NSLog(@<span class="string">"do something 1"</span>)<span class="comment">;</span></span><br><span class="line">    dispatch_sync(<span class="name">queue</span>, ^&#123;//block2</span><br><span class="line">        NSLog(@<span class="string">"do something 2"</span>)<span class="comment">;</span></span><br><span class="line">    &#125;)<span class="comment">;</span></span><br><span class="line">&#125;)<span class="comment">;</span></span><br></pre></td></tr></table></figure>
